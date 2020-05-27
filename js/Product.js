@@ -1,10 +1,12 @@
 class Product {
-  constructor(item, container, callbackPopup) {
+  constructor(item, container, callbackPopup, addToCart) {
     this.item = item;
+    this.addToCart = addToCart;
     this.container = container;
     this.callbackPopup = callbackPopup;
     this.product = null;
     this.showProduct = this.showProduct.bind(this);
+    this.addProductToCart = this.addProductToCart.bind(this);
   }
 
   template() {
@@ -36,10 +38,13 @@ class Product {
     this.callbackPopup(this.item.text);
   }
 
+  addProductToCart(){
+    this.addToCart(this.item)
+  }
+
   addListeners() {
     this.product.querySelector('.showProduct').addEventListener('click', this.showProduct)
-    this.product.querySelector('.showProduct').addEventListener('click', this.showProduct)
-    this.product.querySelector('.showProduct').addEventListener('click', this.showProduct)
+    this.product.querySelector('.buyProduct').addEventListener('click', this.addProductToCart)
   }
 
   removeListener(){
